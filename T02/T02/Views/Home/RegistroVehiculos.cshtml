@@ -13,6 +13,7 @@
 
                 @using (Html.BeginForm("RegistroVehiculos", "Home"))
                 {
+                    @Html.AntiForgeryToken()
                     <div class="form-group">
                         <label>Marca</label>
                         @Html.TextBoxFor(m => m.Marca, new { @placeholder = "Marca", @class = "form-control" })
@@ -35,7 +36,7 @@
 
                     <div class="form-group">
                         <label>Vendedor</label>
-                        @Html.DropDownListFor(m => m.IdVendedor, Model.ListaVendedores,"Seleccione un vendedor",new { @class = "form-control" })
+                        @Html.DropDownListFor(m => m.IdVendedor, Model.ListaVendedores, "Seleccione un vendedor", new { @class = "form-control" })
                     </div>
 
                     <button type="submit" class="btn btn-gradient-danger btn-rounded btn-fw me-2">

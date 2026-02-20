@@ -1,4 +1,5 @@
-﻿
+﻿@model List<T02.Models.VehiculoConsultaModel>
+
 @{
     Layout = "~/Views/Shared/_LayoutExterno.cshtml";
 }
@@ -33,13 +34,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>BMW</td>
-                                    <td>X6</td>
-                                    <td>Blanco</td>
-                                    <td>30000</td>
-                                    <td>Fernanda Fajardo</td>
-                                </tr>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.Marca</td>
+                                        <td>@item.Modelo</td>
+                                        <td>@item.Color</td>
+                                        <td>@item.Precio</td>
+                                        <td>@item.Vendedor</td>
+                                    </tr>
+                                }
                             </tbody>
                         </table>
 

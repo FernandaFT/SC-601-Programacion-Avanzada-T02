@@ -7,10 +7,10 @@ namespace T02.Models
 {
     public class UsuarioModel
     {
-        public int IdVendedor { get; set; }
+        public long IdVendedor { get; set; }
         public string Cedula { get; set; }
         public string Nombre { get; set; }
-        public string CorreoElectronico { get; set; }
+        public string Correo { get; set; }
           
     }
 }

@@ -1,0 +1,10 @@
+CREATE OR ALTER PROCEDURE sp_LVendedores
+AS
+BEGIN
+	SET NOCOUNT ON;
+	SELECT IdVendedor, Nombre
+	FROM Vendedores
+	WHERE Estado = 1
+	ORDER BY Nombre;
+END
+GO

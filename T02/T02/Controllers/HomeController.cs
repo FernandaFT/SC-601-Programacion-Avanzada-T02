@@ -1,8 +1,9 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using T02.EntityFramework;
 using T02.Models;
 
 namespace T02.Controllers
@@ -21,9 +22,14 @@ namespace T02.Controllers
         }
 
         [HttpPost]
-        public ActionResult RegistroVendedores(UsuarioModel modelo)
+        public ActionResult RegistroVendedores(UsuarioModel model)
         {
-            return View();
+            using (var context = new Practica2Entities())
+            {
+                context.sp_RVendedor(model.Cedula, model.Nombre, model.Correo);
+            }
+
+            return RedirectToAction("RegistroVehiculos", "Home");
         }
         #endregion
 
@@ -40,19 +46,45 @@ namespace T02.Controllers
 
         private List<SelectListItem> ObtenerVendedores()
         {
-            // Esto normalmente viene de la base de datos
-            return new List<SelectListItem>
+            using (var context = new Practica2Entities())
             {
-                new SelectListItem { Value = "1", Text = "Carlos Pérez" },
-                new SelectListItem { Value = "2", Text = "Ana Rodríguez" },
-                new SelectListItem { Value = "3", Text = "Luis Mora" }
-            };
+                var vendedores = context.sp_LVendedores().ToList();
+
+                return vendedores.Select(v => new SelectListItem
+                {
+                    Value = v.IdVendedor.ToString(),
+                    Text = v.Nombre
+                }).ToList();
+            }
         }
 
         [HttpPost]
-        public ActionResult RegistroVehiculos(VehiculoModel modelo)
+        [ValidateAntiForgeryToken]
+        public ActionResult RegistroVehiculos(VehiculoModel model)
         {
-            return View();
+            //Si el binder no armó el modelo
+            if (model == null)
+            {
+                model = new VehiculoModel();
+                model.ListaVendedores = ObtenerVendedores();
+                ModelState.AddModelError("", "No se recibieron datos del formulario.");
+                return View(model);
+            }
+
+            //Validación (y recargar dropdown si se devuelve la vista)
+            if (!ModelState.IsValid)
+            {
+                model.ListaVendedores = ObtenerVendedores();
+                return View(model);
+            }
+
+            //Guarda
+            using (var context = new Practica2Entities())
+            {
+                context.sp_RVehiculo(model.Marca, model.Modelo, model.Color, model.Precio, model.IdVendedor);
+            }
+
+            return RedirectToAction("ConsultaVehiculos", "Home");
         }
         #endregion
 
@@ -60,9 +92,22 @@ namespace T02.Controllers
         [HttpGet]
         public ActionResult ConsultaVehiculos()
         {
-            return View();
-        }
+            using (var context = new Practica2Entities())
+            {
+                var lista = context.sp_ListarVehiculos()
+                    .Select(x => new VehiculoConsultaModel
+                    {
+                        IdVehiculo = x.IdVehiculo,
+                        Marca = x.Marca,
+                        Modelo = x.Modelo,
+                        Color = x.Color,
+                        Precio = x.Precio,
+                        Vendedor = x.Vendedor
+                    }).ToList();
 
+                return View(lista);
+            }
+        }
         #endregion
     }
 }

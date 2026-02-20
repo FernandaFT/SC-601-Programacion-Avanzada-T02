@@ -8,6 +8,7 @@
     <div class="col-md-6 grid-margin stretch-card">
         <div class="card bg-gradient-primary card-img-holder text-white">
             <div class="card-body">
+   
                 <img src="~/Template/image/circle.svg" class="card-img-absolute" alt="circle-image" />
                 <h4 class="card-title text-center text-white">Registro Vendedores</h4>
 
@@ -25,7 +26,7 @@
 
                     <div class="form-group">
                         <label>Correo Electrónico</label>
-                        @Html.TextBoxFor(m => m.CorreoElectronico, new { @placeholder = "Correo Electrónico", @class = "form-control" })
+                        @Html.TextBoxFor(m => m.Correo, new { @placeholder = "Correo Electrónico", @class = "form-control" })
                     </div>
 
                     <button type="submit" class="btn btn-gradient-danger btn-rounded btn-fw me-2">Procesar</button>
@@ -35,4 +36,4 @@
         </div>
     </div>
 </div>
-
+<script src="~/Template/js/funciones/registroVendedor.js"></script>
