@@ -7,6 +7,7 @@ namespace T02.Models
 {
     public class VehiculoConsultaModel
     {
+        public string Cedula { get; set; }
         public long IdVehiculo { get; set; }
         public string Marca { get; set; }
         public string Modelo { get; set; }

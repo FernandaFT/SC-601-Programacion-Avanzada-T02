@@ -26,22 +26,22 @@
                         <table class="table text-center">
                             <thead>
                                 <tr>
+                                    <th>Cédula</th>
+                                    <th>Nombre</th>
                                     <th>Marca</th>
                                     <th>Modelo</th>
-                                    <th>Color</th>
                                     <th>Precio</th>
-                                    <th>Vendedor</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach (var item in Model)
                                 {
                                     <tr>
+                                        <td>@item.Cedula</td>
+                                        <td>@item.Vendedor</td>
                                         <td>@item.Marca</td>
                                         <td>@item.Modelo</td>
-                                        <td>@item.Color</td>
                                         <td>@item.Precio</td>
-                                        <td>@item.Vendedor</td>
                                     </tr>
                                 }
                             </tbody>

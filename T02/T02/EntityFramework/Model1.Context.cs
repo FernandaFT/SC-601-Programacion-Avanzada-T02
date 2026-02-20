@@ -99,5 +99,10 @@ namespace T02.EntityFramework
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_ContarVehiculosPorMarca", marcaParameter);
         }
+    
+        public virtual ObjectResult<sp_ListarVehiculo_Result> sp_ListarVehiculo()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_ListarVehiculo_Result>("sp_ListarVehiculo");
+        }
     }
 }

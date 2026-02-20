@@ -101,13 +101,13 @@ namespace T02.Controllers
         {
             using (var context = new Practica2Entities())
             {
-                var lista = context.sp_ListarVehiculos()
+                var lista = context.sp_ListarVehiculo()
                     .Select(x => new VehiculoConsultaModel
                     {
                         IdVehiculo = x.IdVehiculo,
+                        Cedula = x.Cedula,
                         Marca = x.Marca,
                         Modelo = x.Modelo,
-                        Color = x.Color,
                         Precio = x.Precio,
                         Vendedor = x.Vendedor
                     }).ToList();

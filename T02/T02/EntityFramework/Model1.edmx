@@ -41,6 +41,7 @@
         <Function Name="sp_ExisteCedulaVendedor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Cedula" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="sp_ListarVehiculo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_ListarVehiculos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_LVendedores" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_RVehiculo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -129,6 +130,7 @@
           <FunctionImport Name="sp_ContarVehiculosPorMarca" ReturnType="Collection(Int32)">
             <Parameter Name="Marca" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="sp_ListarVehiculo" ReturnType="Collection(Practica2Model.sp_ListarVehiculo_Result)" />
         </EntityContainer>
         <ComplexType Name="sp_LVendedores_Result">
           <Property Type="Int64" Name="IdVendedor" Nullable="false" />
@@ -136,6 +138,15 @@
         </ComplexType>
         <ComplexType Name="sp_ListarVehiculos_Result">
           <Property Type="Int64" Name="IdVehiculo" Nullable="false" />
+          <Property Type="String" Name="Marca" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Modelo" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Color" Nullable="false" MaxLength="100" />
+          <Property Type="Decimal" Name="Precio" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="String" Name="Vendedor" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="sp_ListarVehiculo_Result">
+          <Property Type="Int64" Name="IdVehiculo" Nullable="false" />
+          <Property Type="String" Name="Cedula" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="Marca" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="Modelo" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="Color" Nullable="false" MaxLength="100" />
@@ -194,6 +205,19 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_ExisteCedulaVendedor" FunctionName="Practica2Model.Store.sp_ExisteCedulaVendedor" />
+          <FunctionImportMapping FunctionImportName="sp_ListarVehiculo" FunctionName="Practica2Model.Store.sp_ListarVehiculo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Practica2Model.sp_ListarVehiculo_Result">
+                <ScalarProperty Name="IdVehiculo" ColumnName="IdVehiculo" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="Marca" ColumnName="Marca" />
+                <ScalarProperty Name="Modelo" ColumnName="Modelo" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Vendedor" ColumnName="Vendedor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
