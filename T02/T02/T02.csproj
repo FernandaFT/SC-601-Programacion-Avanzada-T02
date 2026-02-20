@@ -190,6 +190,7 @@
     <Content Include="Template\js\bootstrap-datepicker.min.js" />
     <Content Include="Template\js\chart.umd.js" />
     <Content Include="Template\js\dashboard.js" />
+    <Content Include="Template\js\funciones\registroVehiculo.js" />
     <Content Include="Template\js\funciones\registroVendedor.js" />
     <Content Include="Template\js\jquery.cookie.js" />
     <Content Include="Template\js\misc.js" />

@@ -8,11 +8,14 @@
     <div class="col-md-6 grid-margin stretch-card">
         <div class="card bg-gradient-primary card-img-holder text-white">
             <div class="card-body">
-   
+
                 <img src="~/Template/image/circle.svg" class="card-img-absolute" alt="circle-image" />
                 <h4 class="card-title text-center text-white">Registro Vendedores</h4>
-
-                @using (Html.BeginForm("RegistroVendedores", "Home"))
+                @if (ViewBag.Mensaje != null)
+                {
+                    <div class="alert alert-danger">@ViewBag.Mensaje</div>
+                }
+                @using (Html.BeginForm("RegistroVendedores", "Home", FormMethod.Post, new { @id = "FormRegistroV" }))
                 {
                     <div class="form-group">
                         <label>Cédula</label>
@@ -26,7 +29,7 @@
 
                     <div class="form-group">
                         <label>Correo Electrónico</label>
-                        @Html.TextBoxFor(m => m.Correo, new { @placeholder = "Correo Electrónico", @class = "form-control" })
+                        @Html.TextBoxFor(m => m.Correo, new { @placeholder = "Correo", @class = "form-control" })
                     </div>
 
                     <button type="submit" class="btn btn-gradient-danger btn-rounded btn-fw me-2">Procesar</button>

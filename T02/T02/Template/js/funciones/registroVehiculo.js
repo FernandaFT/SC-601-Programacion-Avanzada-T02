@@ -1,37 +1,48 @@
 ﻿$(function () {
-
-    $("#FormRegistroV").validate({
+    $("#FormRegistroVe").validate({
         rules: {
-            Cedula: {
+            Marca: {
                 required: true
             },
-            Nombre: {
+            Modelo: {
                 required: true
             },
-            Correo: {
-                required: true, email: true
+            Color: {
+                required: true
             },
+            Precio: {
+                required: true,
+                number: true, min: 0.01
+            },
+            IdVendedor: {
+                required: true
+            }
         },
         messages: {
-            Cedula: {
+            Marca: {
                 required: "Campo requerido"
             },
-            Nombre: {
+            Modelo: {
                 required: "Campo requerido"
             },
-            Correo: {
+            Color: {
+                required: "Campo requerido"
+            },
+            Precio: {
                 required: "Campo requerido",
-                email: "Formato incorrecto"
+                number: "Debe ser numérico",
+                min: "Debe ser mayor a 0"
+            },
+            IdVendedor: {
+                required: "Campo requerido"
             }
         },
 
         errorElement: "span",
         errorClass: "text-light",
-
         errorPlacement: function (error, element) {
-            error.insertAfter(element); 
+            error.insertAfter(element);
         },
-
         highlight: function (element) {
             $(element).addClass("is-invalid");
         },
@@ -39,5 +50,4 @@
             $(element).removeClass("is-invalid");
         }
     });
-
 });

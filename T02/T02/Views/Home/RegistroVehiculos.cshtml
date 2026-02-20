@@ -11,7 +11,7 @@
                 <img src="~/Template/image/circle.svg" class="card-img-absolute" alt="circle-image" />
                 <h4 class="card-title text-center text-white">Registro Vehículos</h4>
 
-                @using (Html.BeginForm("RegistroVehiculos", "Home"))
+                @using (Html.BeginForm("RegistroVehiculos", "Home", FormMethod.Post, new { @id = "FormRegistroVe" }))
                 {
                     @Html.AntiForgeryToken()
                     <div class="form-group">
@@ -47,3 +47,4 @@
         </div>
     </div>
 </div>
+<script src="~/Template/js/funciones/registroVehiculo.js"></script>
