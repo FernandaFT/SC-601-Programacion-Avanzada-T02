@@ -22,14 +22,26 @@ namespace T02.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult RegistroVendedores(UsuarioModel model)
         {
+            if (!ModelState.IsValid) return View(model);
+
             using (var context = new Practica2Entities())
             {
+                bool existe = context.Vendedores.Any(v => v.Cedula == model.Cedula);
+
+                if (existe)
+                {
+                    ModelState.AddModelError(nameof(model.Cedula), "La cédula ya está registrada.");
+                    return View(model);
+                }
+
                 context.sp_RVendedor(model.Cedula, model.Nombre, model.Correo);
             }
 
             return RedirectToAction("RegistroVehiculos", "Home");
+
         }
         #endregion
 
@@ -85,6 +97,7 @@ namespace T02.Controllers
             }
 
             return RedirectToAction("ConsultaVehiculos", "Home");
+
         }
         #endregion
 

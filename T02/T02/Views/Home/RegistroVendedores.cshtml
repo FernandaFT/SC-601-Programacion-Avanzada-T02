@@ -17,9 +17,11 @@
                 }
                 @using (Html.BeginForm("RegistroVendedores", "Home", FormMethod.Post, new { @id = "FormRegistroV" }))
                 {
+                    @Html.AntiForgeryToken()
                     <div class="form-group">
                         <label>Cédula</label>
-                        @Html.TextBoxFor(m => m.Cedula, new { @placeholder = "Cédula", @class = "form-control" })
+                        @Html.TextBoxFor(m => m.Cedula, new { @placeholder = "Cédula", @class = "form-control", id = "Cedula" })
+                        @Html.ValidationMessageFor(m => m.Cedula, "", new { @class = "text-ligth" })
                     </div>
 
                     <div class="form-group">

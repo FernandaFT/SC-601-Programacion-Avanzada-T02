@@ -38,6 +38,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="sp_ExisteCedulaVendedor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Cedula" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="sp_ListarVehiculos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_LVendedores" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_RVehiculo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -120,6 +123,9 @@
             <Parameter Name="Correo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_ListarVehiculos" ReturnType="Collection(Practica2Model.sp_ListarVehiculos_Result)" />
+          <FunctionImport Name="sp_ExisteCedulaVendedor" ReturnType="Collection(Int32)">
+            <Parameter Name="Cedula" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_LVendedores_Result">
           <Property Type="Int64" Name="IdVendedor" Nullable="false" />
@@ -184,6 +190,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_ExisteCedulaVendedor" FunctionName="Practica2Model.Store.sp_ExisteCedulaVendedor" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
