@@ -124,7 +124,10 @@
           </FunctionImport>
           <FunctionImport Name="sp_ListarVehiculos" ReturnType="Collection(Practica2Model.sp_ListarVehiculos_Result)" />
           <FunctionImport Name="sp_ExisteCedulaVendedor" ReturnType="Collection(Int32)">
-            <Parameter Name="Cedula" Mode="In" Type="String" />
+          <Parameter Name="Cedula" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_ContarVehiculosPorMarca" ReturnType="Collection(Int32)">
+            <Parameter Name="Marca" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_LVendedores_Result">

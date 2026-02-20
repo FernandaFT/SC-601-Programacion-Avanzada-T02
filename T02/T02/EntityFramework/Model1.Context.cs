@@ -90,5 +90,14 @@ namespace T02.EntityFramework
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_ExisteCedulaVendedor", cedulaParameter);
         }
+    
+        public virtual ObjectResult<Nullable<int>> sp_ContarVehiculosPorMarca(string marca)
+        {
+            var marcaParameter = marca != null ?
+                new ObjectParameter("Marca", marca) :
+                new ObjectParameter("Marca", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_ContarVehiculosPorMarca", marcaParameter);
+        }
     }
 }

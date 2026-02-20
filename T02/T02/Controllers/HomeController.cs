@@ -74,30 +74,24 @@ namespace T02.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult RegistroVehiculos(VehiculoModel model)
         {
-            //Si el binder no armó el modelo
-            if (model == null)
-            {
-                model = new VehiculoModel();
-                model.ListaVendedores = ObtenerVendedores();
-                ModelState.AddModelError("", "No se recibieron datos del formulario.");
-                return View(model);
-            }
-
-            //Validación (y recargar dropdown si se devuelve la vista)
-            if (!ModelState.IsValid)
-            {
-                model.ListaVendedores = ObtenerVendedores();
-                return View(model);
-            }
-
-            //Guarda
             using (var context = new Practica2Entities())
             {
+                var marca = (model.Marca ?? "").Trim();
+
+                int cantidad = context.Vehiculos.Count(v => v.Marca.Trim() == marca);
+
+                if (cantidad >= 2)
+                {
+                    ModelState.AddModelError(nameof(model.Marca),
+                        "No se pueden registrar más de 2 vehículos de la misma marca.");
+
+                    model.ListaVendedores = ObtenerVendedores();
+                    return View(model);
+                }
+
                 context.sp_RVehiculo(model.Marca, model.Modelo, model.Color, model.Precio, model.IdVendedor);
             }
-
             return RedirectToAction("ConsultaVehiculos", "Home");
-
         }
         #endregion
 
